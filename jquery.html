@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stooges: jQuery Style</title>
+  </head>
+  <body>
+    <input type="text" name="firstName" value="">
+    <input type="text" name="lastName" value="">
+    <button type="button" id="stoogeButton">Stooge Me</button>
+
+    <p>
+      Hello, <span id="nameOutput"><em>class</em></span>.
+    </p>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script>
+      var firstNameField = $("input[name=firstName]");
+      var lastNameField = $("input[name=lastName]");
+      var nameOutput = $('#nameOutput');
+
+      function update() {
+        nameOutput.text(firstNameField.val() + ' ' + lastNameField.val());
+      }
+
+      firstNameField.on('keyup', update);
+      lastNameField.on('keyup', update);
+    </script>
+  </body>
+</html>

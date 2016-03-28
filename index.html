@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stooges</title>
+  </head>
+  <body>
+    <form>
+      <input type="text" name="firstName" placeholder="First Name">
+      <input type="text" name="lastName" placeholder="Last Name">
+      <button type="submit" id="stoogeButton">Stooge Me</button>
+    </form>
+
+    <p>
+      Hello, <span id="nameOutput"><em>class</em></span>.
+    </p>
+
+    <ul id="stooges">
+      <li>Larry</li>
+    </ul>
+
+
+    <script>
+      var firstNameField = document.querySelector("input[name=firstName]");
+      var lastNameField = document.querySelector("input[name=lastName]");
+      var nameOutput = document.querySelector('#nameOutput');
+      var stooges = document.querySelector('#stooges');
+      var stoogeForm = document.querySelector('form');
+
+      // Add to the UL
+      stoogeForm.onsubmit = function(ev) {
+        ev.preventDefault();
+        var firstName = firstNameField.value.trim();
+        var lastName = lastNameField.value.trim();
+
+        if (firstName != '' || lastName != '') {
+          stooges.innerHTML += '<li>' + firstName + ' ' + lastName + '</li>';
+          firstNameField.value = '';
+          lastNameField.value = '';
+        }
+        firstNameField.focus();
+      }
+
+      // Keep the nameOutput SPAN up-to-date
+      function update() {
+        nameOutput.innerText = firstNameField.value + ' ' + lastNameField.value;
+      }
+
+      firstNameField.onkeyup = update;
+      lastNameField.onkeyup = update;
+    </script>
+  </body>
+</html>
