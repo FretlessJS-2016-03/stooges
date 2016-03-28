@@ -8,11 +8,16 @@
       angular.module('stoogeApp', [])
       .controller('StoogeController', function($scope) {
         $scope.stooges = ['Larry', 'Curly', 'Moe'];
+        $scope.addStooge = function() {
+          $scope.stooges.push($scope.firstName + ' ' + $scope.lastName);
+          $scope.firstName = '';
+          $scope.lastName = '';
+        };
       });
     </script>
   </head>
   <body ng-controller="StoogeController">
-    <form>
+    <form ng-submit="addStooge()">
       <input type="text" ng-model="firstName" placeholder="First Name">
       <input type="text" ng-model="lastName" placeholder="Last Name">
       <button type="submit" id="stoogeButton">Stooge Me</button>
