@@ -21,6 +21,7 @@
 
 
     <script>
+    (function() {
       var firstNameField = document.querySelector("input[name=firstName]");
       var lastNameField = document.querySelector("input[name=lastName]");
       var nameOutput = document.querySelector('#nameOutput');
@@ -48,6 +49,7 @@
 
       firstNameField.onkeyup = update;
       lastNameField.onkeyup = update;
+    })();  // IIFE
     </script>
   </body>
 </html>
