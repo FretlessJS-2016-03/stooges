@@ -8,6 +8,7 @@
     <form>
       <input type="text" name="firstName" placeholder="First Name">
       <input type="text" name="lastName" placeholder="Last Name">
+      <input type="text" name="age" placeholder="Age">
       <button type="submit" id="stoogeButton">Stooge Me</button>
     </form>
 
@@ -21,9 +22,20 @@
 
 
     <script>
+
+    // Add another text input to stooges/index.html called "age".
+    // Show the age in parentheses next to the stooge's name in the list.
+    // e.g.
+    // * Larry Fine (36)
+    // * Greg Abes (unknown)
+    //
+    // SUPER MEGA BONUS CREDIT
+    // Don't show the parentheses if the age is blank.
+
     (function() {
       var firstNameField = document.querySelector("input[name=firstName]");
       var lastNameField = document.querySelector("input[name=lastName]");
+      var ageField = document.querySelector("input[name=age]");
       var nameOutput = document.querySelector('#nameOutput');
       var stooges = document.querySelector('#stooges');
       var stoogeForm = document.querySelector('form');
@@ -33,9 +45,14 @@
         ev.preventDefault();
         var firstName = firstNameField.value.trim();
         var lastName = lastNameField.value.trim();
+        var age = ageField.value.trim();
 
         if (firstName != '' || lastName != '') {
-          stooges.innerHTML += '<li>' + firstName + ' ' + lastName + '</li>';
+          stoogeString = firstName + ' ' + lastName;
+          if (age != '') {
+            stoogeString += ' (' + age + ')'
+          }
+          stooges.innerHTML += '<li>' + stoogeString + '</li>'
           firstNameField.value = '';
           lastNameField.value = '';
         }
