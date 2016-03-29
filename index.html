@@ -41,18 +41,30 @@
       var stoogeForm = document.querySelector('form');
 
       // Add to the UL
-      stoogeForm.onsubmit = function(ev) {
-        ev.preventDefault();
+      stoogeForm.onsubmit = updateList;
+
+      function buildStoogeString() {
         var firstName = firstNameField.value.trim();
         var lastName = lastNameField.value.trim();
         var age = ageField.value.trim();
+        var stoogeString = firstName + ' ' + lastName;
+        if (age != '') {
+          stoogeString += ' (' + age + ')'
+        }
+        return stoogeString;
+      }
 
-        if (firstName != '' || lastName != '') {
-          stoogeString = firstName + ' ' + lastName;
-          if (age != '') {
-            stoogeString += ' (' + age + ')'
-          }
-          stooges.innerHTML += '<li>' + stoogeString + '</li>'
+      function validate() {
+        return (firstNameField.value.trim() != '' || lastNameField.value.trim() != '')
+      }
+
+      function updateList(ev) {
+        if (ev) {
+          ev.preventDefault();
+        }
+
+        if (validate()) {
+          stooges.innerHTML += '<li>' + buildStoogeString() + '</li>'
           firstNameField.value = '';
           lastNameField.value = '';
         }
@@ -61,11 +73,12 @@
 
       // Keep the nameOutput SPAN up-to-date
       function update() {
-        nameOutput.innerText = firstNameField.value + ' ' + lastNameField.value;
+        nameOutput.innerText = buildStoogeString();
       }
 
       firstNameField.onkeyup = update;
       lastNameField.onkeyup = update;
+      ageField.onkeyup = update;
     })();  // IIFE
     </script>
   </body>
